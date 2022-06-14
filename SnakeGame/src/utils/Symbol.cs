@@ -1,9 +1,9 @@
 ﻿public struct Symbol
 {
 	public char Char { get; }
-	public ConsoleColor Color { get; }
+	public Color Color { get; }
 
-	public Symbol(char character, ConsoleColor color)
+	public Symbol(char character, Color color)
 	{
 		Char = character;
 		Color = color;

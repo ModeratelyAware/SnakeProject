@@ -18,6 +18,7 @@ public class Renderer
 
 	public void Update()
 	{
+		//Do not update if the buffer has not changed.
 		//if (Buffer.SequenceEqual(LastBuffer)) return;
 
 		Buffer.CopyTo(LastBuffer, 0);
@@ -27,17 +28,12 @@ public class Renderer
 			ref Rect);
 	}
 
-	public void Write(string text, int x, int y, ConsoleColor foregroundColor, ConsoleColor backgroundColor, params object?[]? arg)
+	public void Write(string text, int x, int y, ConsoleColor foregroundColor, ConsoleColor backgroundColor)
 	{
 		for (int i = 0; i < text.Length; i++)
 		{
-			string.Format(text, arg);
-
-			var index = x + i + y * WIDTH;
-
-			if (index >= Buffer.Length || index < 0) continue;
-
-			AppendToBuffer(text[i], index, foregroundColor, backgroundColor);
+			var position = x + i + y * WIDTH;
+			AppendToBuffer(text[i], position, foregroundColor, backgroundColor);
 		}
 	}
 
