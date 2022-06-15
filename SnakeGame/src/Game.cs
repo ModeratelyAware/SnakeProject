@@ -12,6 +12,22 @@
 	public Score Score { get; }
 	public Snake Snake { get; }
 
+	private float _gameSpeed = 1;
+	private float _frameTime => 20 * _gameSpeed;
+
+	private bool _gameOver = false;
+
+	public int TimePerFrame
+	{
+		get
+		{
+			return
+			Snake.Direction == Position.Up ||
+			Snake.Direction == Position.Down ?
+			(int)_frameTime * 2 : (int)_frameTime;
+		}
+	}
+
 	public Game(GameOptions gameOptions)
 	{
 		_options = gameOptions;
@@ -41,12 +57,13 @@
 		Bounds.Draw(_renderer);
 
 		var input = new Thread(Input);
+		input.IsBackground = true;
 		input.Start();
 	}
 
 	public void Input()
 	{
-		while (true)
+		while (!_gameOver)
 		{
 			var input = _inputManager.GatherInput();
 			if (input == null) continue;
@@ -59,14 +76,9 @@
 	{
 		Initialize();
 
-		while (true)
+		while (!_gameOver)
 		{
-			if (Snake.Direction == Position.Up ||
-				Snake.Direction == Position.Down)
-			{
-				Thread.Sleep(30);
-			}
-			else Thread.Sleep(15);
+			Thread.Sleep(TimePerFrame);
 
 			Update();
 			Draw();
@@ -81,9 +93,25 @@
 
 			if (Collision.IsColliding(Snake.Head.Position, Snake.Body.Select(x => x.Position)))
 			{
-				Console.ReadKey();
+				GameOver();
 			}
 		}
+	}
+
+	public void GameOver()
+	{
+		var text = "Press ANY key to lose again or ESC to rage quit.";
+		var horizontalCenter = Console.WindowLeft + Console.WindowWidth / 2 - text.Length / 2;
+
+		_renderer.Write(
+			text,
+			horizontalCenter,
+			Bounds.Bottom + 1,
+			ConsoleColor.Red,
+			Bounds.Color.Front);
+
+		_renderer.Update();
+		_gameOver = true;
 	}
 
 	public void Update()

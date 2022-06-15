@@ -8,7 +8,7 @@
 		ConsoleColor backColor = ConsoleColor.Gray)
 	{
 		PlayBounds = new DrawableRectangle(
-		new Color(frontColor, backColor))
+			new Color(frontColor, backColor))
 		{
 			Width = size,
 			Height = size / 2,

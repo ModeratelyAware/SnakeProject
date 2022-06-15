@@ -3,6 +3,7 @@
 	public Action? ChangedDirection;
 
 	private readonly SegmentFactory _segmentFactory;
+	private readonly List<Segment> _segments = new List<Segment>();
 	private Position _direction;
 
 	public Position Direction
@@ -22,26 +23,19 @@
 		}
 	}
 
-	public Segment Head => Segments[0];
-
-	public IEnumerable<Segment> Body => Segments.Skip(1);
-
-	public List<Segment> Segments { get; } = new List<Segment>();
+	public IEnumerable<Segment> Body => _segments.Skip(1);
+	public Segment Head => _segments[0];
+	public IList<Segment> Segments => _segments.AsReadOnly();
 
 	public Snake(SegmentFactory segmentFactory)
 	{
 		_segmentFactory = segmentFactory;
-		Segments.Add(_segmentFactory.Create(this, true));
-	}
-
-	public void Update()
-	{
-		Move();
+		_segments.Add(_segmentFactory.Create(this, true));
 	}
 
 	public void Draw(Renderer renderer)
 	{
-		foreach (var segment in Segments)
+		foreach (var segment in _segments)
 		{
 			renderer.Write(" ", segment.LastPosition.X, segment.LastPosition.Y, Game.Bounds.Color.Front, Game.Bounds.Color.Back);
 			renderer.Write(segment.Symbol.Char.ToString(), segment.Position.X, segment.Position.Y, segment.Symbol.Color.Front, segment.Symbol.Color.Back);
@@ -54,8 +48,7 @@
 		var segment = _segmentFactory.Create(this, false);
 
 		//Set the new segment behind the last segment.
-		Segments.Last().Behind = segment;
-		Segments.Add(segment);
+		_segments.Add(segment);
 	}
 
 	public void Move()
@@ -69,12 +62,17 @@
 		Head.Position = nextPosition;
 
 		//Move each body segment's position to the last position of the segment ahead of it.
-		foreach (var segment in Segments)
+		for (int i = 1; i < _segments.Count; i++)
 		{
-			if (segment.Ahead != null)
-			{
-				segment.Position = segment.Ahead.LastPosition;
-			}
+			var segment = _segments[i];
+			var segmentAhead = _segments[i - 1];
+			if (segmentAhead == null) return;
+			segment.Position = segmentAhead.LastPosition;
 		}
+	}
+
+	public void Update()
+	{
+		Move();
 	}
 }
