@@ -1,6 +1,11 @@
-﻿public class Game
+﻿using SnakeProject.Graphics;
+using SnakeProject.Game;
+using SnakeProject.Input;
+using SnakeProject.Common;
+
+public class SnakeGame
 {
-	private static GameOptions _options;
+	private static SnakeGameOptions _options;
 
 	private readonly CollisionManager _collisionManager;
 	private readonly Controls _controls;
@@ -10,7 +15,9 @@
 	private readonly float _gameSpeed = 1;
 	private Keybind? _input;
 
-	public Game(GameOptions gameOptions)
+	private List<IActor> _actors = new List<IActor>();
+
+	public SnakeGame(SnakeGameOptions gameOptions)
 	{
 		_options = gameOptions;
 
@@ -19,18 +26,24 @@
 		_inputManager = new InputManager(_controls);
 		_renderer = new Renderer();
 
-		Snake = new Snake(
-			new SegmentFactory());
+		Snake = new Snake(new SegmentFactory());
+		Food = new Food();
+		Score = new Score();
 
-		Food = new Food(
-			new Symbol(
-				'■',
-				new Color(ConsoleColor.Red, _options.PlayBounds.Color.Back)));
+		var snakeActor = new SnakeActor(
+			Snake,
+			new Symbol('█', new Color(ConsoleColor.DarkBlue, SnakeGame.Bounds.Color.Back)),
+			new Symbol('█', new Color(ConsoleColor.DarkCyan, SnakeGame.Bounds.Color.Back)));
 
-		Score = new Score(
-			new Color(
-				ConsoleColor.White,
-				ConsoleColor.Black));
+		var foodActor = new FoodActor(
+			new Symbol('■', new Color(ConsoleColor.Red, _options.PlayBounds.Color.Back)));
+
+		var scoreActor = new ScoreActor(
+			new Color(ConsoleColor.White, SnakeGame.Bounds.Color.Back));
+
+		_actors.Add(snakeActor);
+		_actors.Add(foodActor);
+		_actors.Add(scoreActor);
 	}
 
 	public static DrawableRectangle Bounds => _options.PlayBounds;
@@ -76,9 +89,10 @@
 
 	public void Draw()
 	{
-		Snake.Draw(_renderer);
-		Food.Draw(_renderer);
-		Score.Draw(_renderer);
+		foreach (var actor in _actors)
+		{
+			actor.Draw(_renderer);
+		}
 		_renderer.Update();
 	}
 

@@ -37,8 +37,16 @@
 	{
 		foreach (var segment in _segments)
 		{
-			renderer.Write(" ", segment.LastPosition.X, segment.LastPosition.Y, Game.Bounds.Color.Front, Game.Bounds.Color.Back);
-			renderer.Write(segment.Symbol.Char.ToString(), segment.Position.X, segment.Position.Y, segment.Symbol.Color.Front, segment.Symbol.Color.Back);
+			renderer.Erase(
+				segment.LastPosition.X,
+				segment.LastPosition.Y);
+
+			renderer.Write(
+				segment.Symbol.Char,
+				segment.Position.X,
+				segment.Position.Y,
+				segment.Symbol.Color.Front,
+				segment.Symbol.Color.Back);
 		}
 	}
 
