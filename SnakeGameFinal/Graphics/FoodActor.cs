@@ -1,5 +1,4 @@
-﻿using SnakeProject.Common;
-using SnakeProject.Game;
+﻿using SnakeProject.Game;
 
 namespace SnakeProject.Graphics
 {

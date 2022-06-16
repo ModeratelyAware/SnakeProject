@@ -1,7 +1,7 @@
-﻿using SnakeProject.Graphics;
+﻿using SnakeProject.Common;
 using SnakeProject.Game;
+using SnakeProject.Graphics;
 using SnakeProject.Input;
-using SnakeProject.Common;
 
 public class SnakeGame
 {
@@ -26,7 +26,7 @@ public class SnakeGame
 		_inputManager = new InputManager(_controls);
 		_renderer = new Renderer();
 
-		Snake = new Snake(new SegmentFactory());
+		Snake = new Snake(new SnakeSegmentFactory());
 		Food = new Food();
 		Score = new Score();
 
@@ -85,6 +85,7 @@ public class SnakeGame
 
 	public void Update()
 	{
+		_input?.Command.Execute(this);
 		Snake.Update();
 		_collisionManager.Update();
 	}
@@ -96,6 +97,16 @@ public class SnakeGame
 			actor.Draw(_renderer);
 		}
 		_renderer.Update();
+	}
+
+	public void Input()
+	{
+		var snakeai = new SnakeAI(this);
+		while (!_gameOver)
+		{
+			snakeai.Run();
+			//_input = _inputManager.GatherInput();
+		}
 	}
 
 	public void GameOver()
@@ -112,16 +123,5 @@ public class SnakeGame
 
 		_renderer.Update();
 		_gameOver = true;
-	}
-
-	public void Input()
-	{
-		while (!_gameOver)
-		{
-			var input = _inputManager.GatherInput();
-			if (input == null) continue;
-			_input = input;
-			_input.Command.Execute(this);
-		}
 	}
 }

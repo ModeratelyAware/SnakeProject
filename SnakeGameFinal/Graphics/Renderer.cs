@@ -33,6 +33,12 @@ namespace SnakeProject.Graphics
 				ref _rect);
 		}
 
+		public void Erase(int x, int y)
+		{
+			var position = x + y * _width;
+			AppendToBuffer(' ', position);
+		}
+
 		public void Write(string text, int x, int y, ConsoleColor foregroundColor, ConsoleColor backgroundColor)
 		{
 			for (int i = 0; i < text.Length; i++)
@@ -46,12 +52,6 @@ namespace SnakeProject.Graphics
 		{
 			var position = x + y * _width;
 			AppendToBuffer(c, position, foregroundColor, backgroundColor);
-		}
-
-		public void Erase(int x, int y)
-		{
-			var position = x + y * _width;
-			AppendToBuffer(' ', position);
 		}
 
 		private void AppendToBuffer(char c, int position, ConsoleColor foregroundColor, ConsoleColor backgroundColor)

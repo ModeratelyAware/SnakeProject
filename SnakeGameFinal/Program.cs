@@ -1,16 +1,12 @@
-﻿Console.CursorVisible = false;
-Console.SetWindowSize(1, 1);
-Console.SetBufferSize(60, 30);
-Console.SetWindowSize(60, 30);
-
-var quit = false;
+﻿var quit = false;
 
 while (!quit)
 {
-	var options = new SnakeGameOptions(33);
+	var options = new SnakeGameOptions(size: 33, borderThickness: 2);
 	var game = new SnakeGame(options);
 	game.Run();
 
-	if (Console.ReadKey(true).Key == ConsoleKey.Escape) break;
-	else if (!Console.KeyAvailable) continue;
+	var key = Console.ReadKey(true).Key;
+	if (key == ConsoleKey.Escape) break;
+	else continue;
 }

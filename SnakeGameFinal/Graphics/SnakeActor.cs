@@ -5,8 +5,8 @@ namespace SnakeProject.Graphics
 	public class SnakeActor : IActor
 	{
 		private readonly Snake _snake;
-		private readonly Symbol _bodySymbol;
 		private readonly Symbol _headSymbol;
+		private readonly Symbol _bodySymbol;
 
 		public SnakeActor(Snake snake, Symbol headSymbol, Symbol bodySymbol)
 		{

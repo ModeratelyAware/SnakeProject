@@ -4,11 +4,15 @@ namespace SnakeProject.Game
 {
 	public class Snake
 	{
-		public Action? ChangedDirection;
-
-		private readonly SegmentFactory _segmentFactory;
-		private readonly List<Segment> _segments = new List<Segment>();
+		private readonly SnakeSegmentFactory _segmentFactory;
+		private readonly List<SnakeSegment> _segments = new List<SnakeSegment>();
 		private Position _direction;
+
+		public Snake(SnakeSegmentFactory segmentFactory)
+		{
+			_segmentFactory = segmentFactory;
+			_segments.Add(_segmentFactory.Create(this, true));
+		}
 
 		public Position Direction
 		{
@@ -27,15 +31,11 @@ namespace SnakeProject.Game
 			}
 		}
 
-		public IEnumerable<Segment> Body => _segments.Skip(1);
-		public Segment Head => _segments[0];
-		public IList<Segment> Segments => _segments.AsReadOnly();
+		public SnakeSegment Head => _segments[0];
+		public IEnumerable<SnakeSegment> Body => _segments.Skip(1);
+		public IList<SnakeSegment> Segments => _segments.AsReadOnly();
 
-		public Snake(SegmentFactory segmentFactory)
-		{
-			_segmentFactory = segmentFactory;
-			_segments.Add(_segmentFactory.Create(this, true));
-		}
+		public event Action? ChangedDirection;
 
 		public void Grow()
 		{
