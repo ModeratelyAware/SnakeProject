@@ -24,4 +24,4 @@ I layered the project in a way that the Graphics and Input layers have one-way c
 
 ## Fun things
 
-I used bit shifting in the renderer I created to allow for setting the background color of a char, this was actually very interesting because the attributes are stored in a single short.
+I used bit shifting in the renderer I created to allow for setting the background color of a char, the native console code uses a single short to facilitate all of the char's attributes.
