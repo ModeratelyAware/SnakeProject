@@ -36,10 +36,12 @@ public class SnakeGame
 			new Symbol('█', new Color(ConsoleColor.DarkCyan, SnakeGame.Bounds.Color.Back)));
 
 		var foodActor = new FoodActor(
+			Food,
 			new Symbol('■', new Color(ConsoleColor.Red, _options.PlayBounds.Color.Back)));
 
 		var scoreActor = new ScoreActor(
-			new Color(ConsoleColor.White, SnakeGame.Bounds.Color.Back));
+			Score,
+			new Color(ConsoleColor.White, SnakeGame.Bounds.Color.Front));
 
 		_actors.Add(snakeActor);
 		_actors.Add(foodActor);

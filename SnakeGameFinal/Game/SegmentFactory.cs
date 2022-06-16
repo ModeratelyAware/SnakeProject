@@ -13,6 +13,7 @@ namespace SnakeProject.Game
 
 			return new Segment()
 			{
+				IsHead = isHead,
 				Position = lastSegment == null ? _spawnPos : lastSegment.LastPosition
 			};
 		}

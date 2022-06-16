@@ -1,4 +1,6 @@
-﻿public class SnakeGameOptions
+﻿using SnakeProject.Graphics;
+
+public class SnakeGameOptions
 {
 	public DrawableRectangle PlayBounds { get; }
 

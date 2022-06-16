@@ -8,9 +8,11 @@ namespace SnakeProject.Graphics
 		private readonly Symbol _bodySymbol;
 		private readonly Symbol _headSymbol;
 
-		public SnakeActor(Snake snake, Symbol head, Symbol body)
+		public SnakeActor(Snake snake, Symbol headSymbol, Symbol bodySymbol)
 		{
 			_snake = snake;
+			_headSymbol = headSymbol;
+			_bodySymbol = bodySymbol;
 		}
 
 		public void Draw(Renderer renderer)

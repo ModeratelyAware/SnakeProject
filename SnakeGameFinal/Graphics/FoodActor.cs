@@ -8,9 +8,10 @@ namespace SnakeProject.Graphics
 		private readonly Food _food;
 		private readonly Symbol _symbol;
 
-		public FoodActor(Food food)
+		public FoodActor(Food food, Symbol symbol)
 		{
 			_food = food;
+			_symbol = symbol;
 		}
 
 		public void Draw(Renderer renderer)

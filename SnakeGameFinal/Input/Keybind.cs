@@ -8,10 +8,6 @@ public class Keybind
 		Key = consoleKey;
 	}
 
-	public Keybind(ChangeSnakeDirectionCommand changeSnakeDirectionCommand, ConsoleKey w)
-	{
-	}
-
 	public ICommand Command { get; }
 	public ConsoleKey Key { get; set; }
 }
