@@ -8,9 +8,6 @@ This is a simple recreation of the classic game, Snake within the .NET console. 
 ### A twist
 The multiplier for score gained per food goes down every time the snake changes direction. This promotes more reactive and calculated play to achieve higher scores.
 
-### Note
-I am actively working on refactoring this and making changes to increase clarity.
-
 ## Structure
 ```mermaid
 graph  TD;  
