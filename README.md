@@ -1,7 +1,7 @@
 # SnakeProject
 
 ## Summary
-This is a recreation of the classic game, Snake, within the .NET console. I could have used WinForms, MonoGame, or Unity but my goal was to learn how to code as much as possible from scratch. The biggest challenge of this project was the rendering. I used platform invoke to write directly to the native consoles buffer and used bitshifting to allow changing of foreground and background colors for each on-screen character due to the CharAttributes being a mere short value.
+This is a recreation of the classic game, Snake, within the .NET console. I could have used WinForms, MonoGame, or Unity but my goal was to learn how to code as much as possible from scratch. The biggest challenge of this project was the rendering. I used platform invoke to write directly to the native consoles buffer and used bit-shifting to allow changing of foreground and background colors for each on-screen character due to the CharAttributes being a mere short value.
 
 ### Gameplay Twist
 The multiplier for score gained per food goes down every time the snake changes direction. This promotes more reactive and calculated play to achieve higher scores.
