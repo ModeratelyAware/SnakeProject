@@ -21,4 +21,4 @@ I layered the project in a way that the Graphics and Input layers have one-way c
 
 I want to give a special thanks to RB Whitaker. I bought his book [The C# Player's Guide](https://www.amazon.com/C-Players-Guide-5th/dp/0985580151) shortly after derparting my 6+ year position in IT, and it provided for a fantastic and easy-to-digest entry into C#. 
 
-As someone who is not the most social, I was even pulled into his Discord community where readers can ask questions and post their completed challenges from the book for review. He himself has spent over 2 ½ hours answering a single question of mine in more detail than I ever could have hoped for, his passion clearly shows.
+As someone who is not the most social, I was even pulled into his Discord community where readers can ask questions and post their completed challenges from the book for review. He himself has spent over 2 ½ hours answering a single question of mine in more detail than I ever could have hoped for, and his passion clearly shows.
