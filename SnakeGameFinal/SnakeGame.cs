@@ -15,7 +15,7 @@ public class SnakeGame
 	private readonly float _gameSpeed = 1;
 	private Keybind? _input;
 
-	private List<IActor> _actors = new List<IActor>();
+	private readonly List<IActor> _actors = new List<IActor>();
 
 	public SnakeGame(SnakeGameOptions gameOptions)
 	{
@@ -67,6 +67,7 @@ public class SnakeGame
 		{
 			Thread.Sleep(TimePerFrame);
 
+			Input();
 			Update();
 			Draw();
 		}
@@ -77,10 +78,14 @@ public class SnakeGame
 		Snake.ChangedDirection += Score.DecreaseMultiplier;
 		Food.SetPositionRandomly();
 		Bounds.Draw(_renderer);
+	}
 
-		var input = new Thread(Input);
-		input.IsBackground = true;
-		input.Start();
+	private void Input()
+	{
+		while (Console.KeyAvailable)
+		{
+			_input = _inputManager.GatherInput();
+		}
 	}
 
 	public void Update()
@@ -97,16 +102,6 @@ public class SnakeGame
 			actor.Draw(_renderer);
 		}
 		_renderer.Update();
-	}
-
-	public void Input()
-	{
-		var snakeai = new SnakeAI(this);
-		while (!_gameOver)
-		{
-			snakeai.Run();
-			//_input = _inputManager.GatherInput();
-		}
 	}
 
 	public void GameOver()

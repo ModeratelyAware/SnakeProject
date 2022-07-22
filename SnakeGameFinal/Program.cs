@@ -1,4 +1,6 @@
-﻿var quit = false;
+﻿using System.Diagnostics;
+
+var quit = false;
 
 while (!quit)
 {

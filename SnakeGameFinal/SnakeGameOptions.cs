@@ -8,6 +8,14 @@ public class SnakeGameOptions
 		ConsoleColor frontColor = ConsoleColor.Black,
 		ConsoleColor backColor = ConsoleColor.Gray)
 	{
+		var consoleMargin = 30;
+		var consoleSize = size + consoleMargin;
+
+		Console.CursorVisible = false;
+		Console.SetWindowSize(1, 1);
+		Console.SetBufferSize(consoleSize, consoleSize / 2);
+		Console.SetWindowSize(consoleSize, consoleSize / 2);
+
 		PlayBounds = new DrawableRectangle(
 			borderThickness,
 			new Color(frontColor, backColor))
@@ -17,13 +25,6 @@ public class SnakeGameOptions
 			Left = (Console.WindowWidth - size) / 2,
 			Top = (Console.WindowHeight - size / 2) / 2
 		};
-
-		var consoleMargin = 30;
-		var consoleSize = size + consoleMargin;
-		Console.CursorVisible = false;
-		Console.SetWindowSize(1, 1);
-		Console.SetBufferSize(consoleSize, consoleSize / 2);
-		Console.SetWindowSize(consoleSize, consoleSize / 2);
 	}
 
 	public DrawableRectangle PlayBounds { get; }
