@@ -7,15 +7,15 @@ public class SnakeGame
 {
 	private static SnakeGameOptions _options;
 
+	private readonly List<IActor> _actors = new List<IActor>();
 	private readonly CollisionManager _collisionManager;
 	private readonly Controls _controls;
 	private readonly InputManager _inputManager;
 	private readonly Renderer _renderer;
-	private bool _gameOver = false;
 	private readonly float _gameSpeed = 1;
-	private Keybind? _input;
 
-	private readonly List<IActor> _actors = new List<IActor>();
+	private bool _gameOver = false;
+	private Keybind? _input;
 
 	public SnakeGame(SnakeGameOptions gameOptions)
 	{
