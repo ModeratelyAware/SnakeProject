@@ -15,3 +15,10 @@ Graphics --> Game;
 Input--> Game;  
 ```
 I layered the project in a way that the Graphics and Input layers have one-way communication with the Game layer. That way, if I ever wanted to swap input or rendering systems, I could do so without touching any of the game’s logic.
+
+
+## Some Words
+
+I want to give a special thanks to RB Whitaker. I bought his book “The C# Player’s Guide” shortly after leaving my job, and it provided for a fantastic, and easy-to-digest entry into C#. 
+
+As someone who is not the most social, I was even pulled into his Discord community where readers can ask questions and post their completed challenges from the book to be reviewed. He himself has spent over 2 ½ hours answering a single question of mine in more detail than I could have hoped for and his passion clearly shows.
